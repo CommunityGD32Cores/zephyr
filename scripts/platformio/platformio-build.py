@@ -1519,6 +1519,8 @@ def get_zephyr_venv_dir():
     zephyr_version = version.get_original_version(
         platform.get_package_version("framework-zephyr")
     )
+    if zephyr_version is None:
+        zephyr_version = platform.get_package_version("framework-zephyr").replace("+", "_").replace(".", "_")
     return os.path.join(
         env.subst("$PROJECT_CORE_DIR"), "penv", ".zephyr-" + zephyr_version
     )
